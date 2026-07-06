@@ -20,7 +20,7 @@ jobs:
         run: pip install requests
         
       - name: 执行签到
-        run: python checkin.py
+        run: python .github/workflows/checkin.py
         env:
           # 这里的名字要和后面设置的一致
           GLADOS_COOKIE: ${{ secrets.GLADOS_COOKIE }}
