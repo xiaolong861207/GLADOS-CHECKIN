@@ -27,9 +27,12 @@ def main():
         try:
             resp = requests.post(url, headers=headers, timeout=10)
             data = resp.json()
-            # 检查返回结果
-            if data.get('code') == 0 or 'success' in str(data).lower():
-                print(f"✅ 签到成功！响应信息：{data}")
+            # ✅ 修正：Glados 接口返回 code=1 表示签到成功
+            if data.get('code') == 1:
+                change = data.get('change', 0)
+                balance = data.get('balance', 0)
+                message = data.get('message', '')
+                print(f"✅ 签到成功！增加 {change} 积分，当前总积分 {balance}，消息：{message}")
                 success = True
                 break
             else:
